@@ -21,6 +21,7 @@ public class Mob
         int reducedDamage = AttackDamage - inventory.GetDamageReduction();
         if (reducedDamage < 0) reducedDamage = 0;
         Console.WriteLine($"{Name} атакует вас и наносит {reducedDamage} урона!");
+        Console.WriteLine($"Вы атакуете {Name} и наносите {inventory.GetWeaponDamage()} урона! Теперь его хп равно {HP}");
         player.TakeDamage(reducedDamage);
     }
 

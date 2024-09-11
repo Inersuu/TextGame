@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 public class Foodetc
 {
-    public int HP { get; private set; }
+    public int HP { get;  set; }
     public int Hunger { get;  set; }
     public int Thirst { get;  set; }
 
@@ -20,12 +20,13 @@ public class Foodetc
     {
         if (Hunger > 0)
         {
-            Hunger -= 10;
+            Hunger -= 5;
         }
+        
         
         if (Thirst > 0)
         {
-            Thirst -= 10;
+            Thirst -= 5;
         }
 
         if (Hunger < 0) Hunger = 0;
@@ -40,6 +41,7 @@ public class Foodetc
         if (HP <= 0)
         {
             Console.WriteLine("Вы погибли. Игра окончена.");
+            Console.ReadKey();
         }
     }
 
@@ -51,6 +53,14 @@ public class Foodetc
         if (HP <= 0)
         {
             Console.WriteLine("Вы погибли. Игра окончена.");
+            Console.ReadKey();
         }
+    }
+    public void CheckStats()
+    {
+        if (Thirst > 100) Thirst = 100;
+        if (HP > 100) HP = 100;
+        if (Hunger > 100) Hunger = 100;
+        Console.WriteLine("Работает?");
     }
 }
