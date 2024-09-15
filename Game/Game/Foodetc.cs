@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 public class Foodetc
 {
-    public int HP { get;  set; }
+    public double HP { get;  set; }
     public int Hunger { get;  set; }
     public int Thirst { get;  set; }
 
@@ -46,7 +46,7 @@ public class Foodetc
     }
 
     // Метод для получения урона
-    public void TakeDamage(int damage)
+    public void TakeDamage(double damage)
     {
         HP -= damage;
         Console.WriteLine($"Вы получили {damage} урона! Текущие HP: {HP}");
@@ -61,6 +61,5 @@ public class Foodetc
         if (Thirst > 100) Thirst = 100;
         if (HP > 100) HP = 100;
         if (Hunger > 100) Hunger = 100;
-        Console.WriteLine("Работает?");
     }
 }

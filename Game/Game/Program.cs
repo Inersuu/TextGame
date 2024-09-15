@@ -8,6 +8,11 @@ class Program
     static void Main(string[] args)
     {
         bool game = false;
+        Foodetc food = new Foodetc();
+        Time time = new Time();
+        Inventory inventory = new Inventory();
+        Store store = new Store();
+        Upgrade upgrade = new Upgrade();
         while (game == false)
         {
             Console.WriteLine("1 -- Начать игру");
@@ -29,17 +34,14 @@ class Program
                     break;
             }
         }
-        Foodetc food = new Foodetc();
-        Time time = new Time();
-        Inventory inventory = new Inventory();
-        Store store = new Store();
-        Upgrade upgrade = new Upgrade();
+        
         
 
         Console.WriteLine("Игра началась!");
 
         while (true)
         {
+            food.CheckStats();
             Console.WriteLine($"\nХП - {food.HP}  Голод - {food.Hunger}  Жажда - {food.Thirst}  Золото - {inventory.Gold}");
             Console.WriteLine("\nЧто вы хотите сделать?");
             Console.WriteLine("1 -- Осмотреться");
@@ -47,7 +49,7 @@ class Program
             Console.WriteLine("3 -- Магазин");
             Console.WriteLine("4 -- Показать инвентарь");
             Console.WriteLine("5 -- Улучшения");
-            Console.WriteLine("6 -- Показать снаряжение");
+            Console.WriteLine("6 -- Показать характеристики");
             Console.WriteLine("7 -- Спать");
             Console.WriteLine("8 -- Выйти из игры");
 
@@ -83,6 +85,7 @@ class Program
                             switch (mobChoice)
                             {
                                 case 1:
+                                    Console.Clear(); // Очищаем консоль после выбора
                                     Console.WriteLine("Вы решили атаковать моба!");
                                     mob.Attack(food, inventory);
                                     Console.WriteLine("Вы атакуете моба!");
@@ -93,9 +96,12 @@ class Program
                                         Console.WriteLine($"{mob.Name} был побежден!");
 
                                         // Генерация награды за убийство моба
-                                        int reward = (new Random()).Next(30, 101);
+                                        int reward = new Random().Next(30, 101);
+                                        int xpl = new Random().Next(20, 71);
                                         inventory.Gold += reward;
+                                        inventory.XP += xpl;
                                         Console.WriteLine($"Вы получили {reward} золота.");
+                                        Console.WriteLine($"Вы получили {xpl} опыта.");
 
                                         battleOver = true;
                                     }

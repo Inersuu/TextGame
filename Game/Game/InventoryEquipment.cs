@@ -4,7 +4,9 @@ using System.Collections.Generic;
 public class Inventory
 {
     public int Gold { get; set; }
-    private List<string> Items { get; set; }
+    public int XP { get; set; }
+    public int XPLevel { get; set; }
+    public List<string> Items { get; set; }
     public string EquippedWeapon { get; set; }
     public string EquippedArmor { get; set; }
 
@@ -12,6 +14,27 @@ public class Inventory
     {
         Items = new List<string>();
         Gold = 100;  // Начальное количество золота
+        XP = 0;
+        XPLevel = 1;
+    }
+    public void check()
+    {
+        //Atributes atributes = new Atributes();
+        if (XP >= 100) XPLevel += 1;
+        //atributes.Strength++;
+        if (XP >= 100)
+        /*{
+            int chance = new Random().Next(0, 2);
+            if (chance == 1)
+            {
+                atributes.Strength++;
+            }
+            else
+            {
+                atributes.Agility++;
+            }
+        }*/
+        if (XP >= 100) XP -= 100; 
     }
 
     // Добавить предмет в инвентарь
@@ -35,6 +58,8 @@ public class Inventory
                 Console.WriteLine($"{i + 1}. {Items[i]}");
             }
         }
+        
+        
     }
 
     // Использование предметов
@@ -93,52 +118,64 @@ public class Inventory
     // Показать текущее снаряжение
     public void ShowEquipment()
     {
+        //Atributes atributes = new Atributes();
+        //atributes.check();
+        check();
         Console.WriteLine($"Текущее оружие: {EquippedWeapon ?? "Нет"}");
         Console.WriteLine($"Текущее урон: {GetWeaponDamage()}");
         Console.WriteLine($"Текущая броня: {EquippedArmor ?? "Нет"}");
-        Console.WriteLine($"Текущее защита: {GetDamageReduction()}");
+        Console.WriteLine($"Текущее защита: {GetDamageReduction()}\n\n");
+        Console.WriteLine($"Текущий уровень: {XPLevel}");
+        Console.WriteLine($"Текущее количество опыта: {XP}");
+        Console.WriteLine($"Опыта до следующего уровня: {100 - XP}\n\n");
+        //Console.WriteLine($"Сила: {atributes.Strength}");
+        //Console.WriteLine($"Изменение урона от силы: +{atributes.StrengthEff}");
+        //Console.WriteLine($"Ловкость: {atributes.Agility}");
+        //WriteLine($"Изменение защиты от ловкости: +{atributes.AgilityEff}");
         Console.ReadKey();
     }
 
     // Получить урон, учитывая броню
-    public int GetDamageReduction()
+    public double GetDamageReduction()
     {
+        //Atributes atributes = new Atributes();
         if (EquippedArmor == "Ржавая Медная Броня")
         {
             Console.WriteLine("Броня снижает урон.");
-            return 4; // Пример уменьшения урона на 4
+            return 4 /*+ atributes.AgilityEff*/; // Пример уменьшения урона на 4
         }
         if (EquippedArmor == "Потрёпанная Медная Броня")
         {
             Console.WriteLine("Броня снижает урон.");
-            return 6; // Пример уменьшения урона на 10
+            return 6 /*+ atributes.AgilityEff*/; // Пример уменьшения урона на 10
         }
         if (EquippedArmor == "Целая Медная Броня")
         {
             Console.WriteLine("Броня снижает урон.");
-            return 8; // Пример уменьшения урона на 10
+            return 8 /*+ atributes.AgilityEff*/; // Пример уменьшения урона на 10
         }
         return 0;
     }
 
     // Получить бонус к атаке
-    public int GetWeaponDamage()
+    public double GetWeaponDamage()
     {
+        //Atributes atributes = new Atributes();
         if (EquippedWeapon == "Ржавый Бронзовый Меч")
         {
             Console.WriteLine("Меч увеличивает урон.");
-            return 10; // Пример увеличения урона
+            return 10 /*+ atributes.StrengthEff*/; // Пример увеличения урона
         }
         if (EquippedWeapon == "Потрёпанный Бронзовый Меч")
         {
             Console.WriteLine("Меч увеличивает урон.");
-            return 15; // Пример увеличения урона
+            return 15 /*+ atributes.StrengthEff*/; // Пример увеличения урона
         }
         if (EquippedWeapon == "Целый Бронзовый Меч")
         {
             Console.WriteLine("Меч увеличивает урон.");
-            return 20; // Пример увеличения урона
+            return 20 /*+ atributes.StrengthEff*/; // Пример увеличения урона
         }
-        return 5; // Базовый урон
+        return 500; // Базовый урон
     }
 }

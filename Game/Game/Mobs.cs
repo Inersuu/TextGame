@@ -5,7 +5,7 @@ using System.Threading;
 public class Mob
 {
     public string Name { get; private set; }
-    public int HP { get; private set; }
+    public double HP { get; private set; }
     public int AttackDamage { get; private set; }
 
     public Mob(string name, int hp, int damage)
@@ -18,7 +18,7 @@ public class Mob
     // Метод атаки моба
     public void Attack(Foodetc player, Inventory inventory)
     {
-        int reducedDamage = AttackDamage - inventory.GetDamageReduction();
+        double reducedDamage = AttackDamage - inventory.GetDamageReduction();
         if (reducedDamage < 0) reducedDamage = 0;
         Console.WriteLine($"{Name} атакует вас и наносит {reducedDamage} урона!");
         Console.WriteLine($"Вы атакуете {Name} и наносите {inventory.GetWeaponDamage()} урона! Теперь его хп равно {HP}");
@@ -26,7 +26,7 @@ public class Mob
     }
 
     // Метод получения урона мобом
-    public void TakeDamage(int damage)
+    public void TakeDamage(double damage)
     {
         HP -= damage;
         if (HP <= 0)
